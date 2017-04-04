@@ -1,0 +1,15 @@
+<div id="dcLeft">
+
+    <div id="menu">
+            <foreach name="threeji" item="val" key="k">
+            <ul>
+                <li onclick="LeftShowHide(4);"><a><i class="system"></i><em><{$k}></em></a></li>
+                <dl id="LeftColumn4">
+                    <volist name="val" id="value">
+                    <dd><a href="<{:U($value['name'])}>"><{$value.title}></a></dd>
+                    </volist>
+                </dl>
+            </ul>
+        </foreach>
+    </div>
+</div>
