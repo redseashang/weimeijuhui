@@ -1,0 +1,77 @@
+<include file="Public/web_header" />
+
+<include file="Public/web_left" />
+<div id="dcMain">
+    <!-- 当前位置 -->
+    <div id="urHere">系统管理中心<b>></b><strong><{$Menu}>列表</strong> </div>   <div class="mainBox" style="height:auto!important;height:550px;min-height:550px;">
+    <h3>
+        <a href="<{:U('add')}>" class="actionBtn add">添加<{$Menu}></a>
+        <{$Menu}>列表
+    </h3>
+    <div class="filter">
+        <form action="<{:U('index')}>" method="get">
+            <!--<select name="cat_id">-->
+                <!--<option value="0">未分类</option>-->
+                <!--<option value="1"> 公司动态</option>-->
+                <!--<option value="2"> 行业新闻</option>-->
+            <!--</select>-->
+            <input name="Key" type="text" class="inpMain" size="20" />
+            <input class="btnGray" type="submit" value="筛选" />
+        </form>
+    </div>
+    <div id="list">
+        <form id="MyForm" method="post">
+            <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+                <tr>
+                    <th width="22" align="center">
+                        <input name='chkall' type='checkbox' onclick="CheckObject.AllBoxFun(this);">
+                    </th>
+                    <th align="center">ID</th>
+                    <th align="center">排序</th>
+                    <th align="left"><{$Menu}>名称</th>
+                    <th align="center">状态</th>
+                    <th align="center">操作</th>
+                </tr>
+
+                <volist name="List" id="val">
+                <tr>
+                    <td align="center">
+                        <input type="checkbox" name="DelID[]" value="<{$val.AdminID}>" />
+                    </td>
+                    <td align="center"><{$val.AdminID}></td>
+                    <td align="center"><input type="text" name="Sort[<{$val.AdminID}>]" value="<{$val.AdminSort}>" class="inpMain" size="3"></td>
+                    <td align="left"><{$val.AdminName}></td>
+                    <td align="center">
+                        <if condition="$val['AdminState'] eq 1">
+                            以启用
+                        <else />
+                            未启用
+                        </if>
+                    </td>
+                    <td align="center">
+                        <a href="<{:U('edit',array('id'=>$val['AdminID']))}>">编辑</a> |
+                        <a href="<{:U('del',array('id'=>$val['AdminID']))}>">删除</a>
+                    </td>
+                </tr>
+                </volist>
+            </table>
+            <div class="action">
+                <select id="Action">
+                    <option value="0">请选择...</option>
+                    <option value="Del" url="<{:U('del')}>">删除</option>
+                    <option value="Sort" url="<{:U('sort')}>">排序</option>
+                </select>
+                <input class="btn" type="button" value="执行" onclick="CheckObject.ExecuteFun();" />
+            </div>
+        </form>
+    </div>
+    <div class="clear"></div>
+    <div class="pager">
+        总计 <{$count}> 个记录，共 <{$totalPages}> 页，当前第 <{$CurrentPage}> 页 |
+        <{$page}>
+    </div>
+
+</div>
+</div>
+
+<include file="Public/web_footer" />
